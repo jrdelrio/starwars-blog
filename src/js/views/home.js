@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import CardCharacter from "../component/CardCharacter.js";
+import { useSearchParams, Link } from "react-router-dom";
+import CardCharacter from "../component/CardCharacter.jsx";
 import CardPlanet from "../component/CardPlanet.jsx";
 
 export const Home = () => {
@@ -30,12 +30,13 @@ export const Home = () => {
 			{/*characters section*/}
 			<section>
 				<h2 className="sectionTitle">Characters</h2>
-				<div className="row flex-row flex-nowrap">
+				<div className="row flex-row flex-nowrap rowSection">
 					{masterList.map((charUrl, index) => {
 						return(
-							<div className="col-3" key={index}>
-								 <CardCharacter className="CardCharacter" url={charUrl.url}/>
-							</div>)
+								<div className="col-3" key={index}>
+									<CardCharacter className="CardCharacter" url={charUrl.url}/>
+								</div>
+							)
 					})}
             	</div>
         	</section>

@@ -8,7 +8,6 @@ const CardCharacter = (props) => {
 
     // el objeto personaje de esta card se llama char
     useEffect(()=>{
-
         fetch(url)
         .then(res => res.json())
         .then(data => setChar(data.result.properties))
@@ -25,7 +24,7 @@ const CardCharacter = (props) => {
                     <p className="card-text">Eyes-color: {char.eye_color}</p>
                     <p className="card-text">Hair-color: {char.hair_color}</p>
                     <div>
-                        <Link className='btn btn-outline-primary learnMoreButton' to='...'>Learn more!</Link>
+                        <Link className='btn btn-outline-primary learnMoreButton' to='/single/:theid' char={props}>Learn more!</Link>
                         <button className='btn btn-outline-primary likeButton'><i className="fa-regular fa-heart"></i></button>
                     </div>
                 </div>
