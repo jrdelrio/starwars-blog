@@ -20,7 +20,6 @@
 /*cards*/
 .card-text {
     margin-bottom: 0
-    
 }
 .card-body {
     text-align: left;
@@ -33,7 +32,7 @@
     padding-bottom: 6px
 }
 
-label {
+.likeButton {
     background-color: white !important;
     border: 1px #ffc107 solid !important;
     margin-top: 10px;
@@ -42,6 +41,11 @@ label {
     float: right;
     color: #ffc107 !important;
 }
+.selected {
+    background-color: #ffc107 !important;
+    color: black !important
+}
+
 label:hover,
 input,
 .fa-heart:hover {
@@ -86,19 +90,11 @@ input,
 .mb-3{
     border: none
 }
-.singleFooter{
+/*single-footer*/
+.singleFooter {
     border-top: solid #dc3545 1px;
-    margin-top: 20px
-}
-.footerList {
-    margin-top: 15px;
-}
-.footerList > li {
-    display: inline;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin-top: 20px;
     color: #dc3545;
     font-weight: 700;
 }
 
-/*footer*/

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
-import { Single } from "../views/single";
+import { Context } from "../store/appContext"; // trsaigo todos los datos y funciones definidas en appContext.js
 
 const CardCharacter = (props) => {
 
     const [url, setUrl] = useState(props.url);
     const [char, setChar] = useState({});
-    const { store, actions } = useContext(Context);
     const [uid, setUid] = useState();
+    const [favorite, setFavorite] = useState(false);
+    const { store, actions } = useContext(Context);
 
     // el objeto personaje de esta card se llama char
     useEffect(()=>{
@@ -19,13 +19,6 @@ const CardCharacter = (props) => {
         .catch(err => console.error(err));
     },[url]);
 
-    const handleChange = (ev) => {
-        console.log(ev)
-        // si no esta activo
-            // actions.addFavorite(char.name)
-        // si SI está
-    };
-    
     if (char !== {}){
         return (
             <div className="card">
@@ -36,9 +29,19 @@ const CardCharacter = (props) => {
                     <p className="card-text"><b>Eyes-color:</b> {char.eye_color}</p>
                     <p className="card-text"><b>Hair-clor:</b> {char.hair_color}</p>
                     <div>
-                        <Link className='btn btn-outline-primary learnMoreButton' to={`/single/people${uid}`} >Learn more!</Link>
-                        <input type="checkbox" className='btn btn-outline-primary btn-check likeButton' id='btn-check-2' checked autoComplete="off" onChange={handleChange}/>
-                        <label className="btn btn-primary" htmlFor="btn-check-2"><i className="fa-regular fa-heart"></i></label>
+                        <Link className='btn btn-outline-primary learnMoreButton' to={`/single/people/${uid}`} >Learn more!</Link>
+                        <button  
+                               className={`btn btn-outline-primary likeButton ${favorite ? "selected" : null}`}
+                               onClick={(ev) => {
+                                                if (favorite === false){
+                                                        actions.addFavorite(char.name);
+                                                        setFavorite(true);
+                                                }else if (favorite === true){
+                                                    actions.deleteFavorite(char.name);
+                                                    setFavorite(false)
+                                                }}
+                                        }><i className="fa-regular fa-heart"></i>
+                        </button>
                     </div>
                 </div>
             </div>

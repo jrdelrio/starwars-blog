@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext"; // trsaigo todos los datos y funciones definidas en appContext.js
 
 const CardVehicle = (props) => {
 
     const [url, setUrl] = useState(props.url);
     const [vehicle, setVehicle] = useState({});
     const [uid, setUid] = useState();
+    const [favorite, setFavorite] = useState(false);
+    const { store, actions } = useContext(Context);
     
 
     // el objeto planet se llama planet
@@ -18,10 +21,13 @@ const CardVehicle = (props) => {
     },[url]);
 
     const handleChange = (ev) => {
-        console.log(ev)
-        // si no esta activo
-            // actions.addFavorite(char.name)
-        // si SI está
+        if (favorite === false){
+            actions.addFavorite(vehicle.name); // me agrega todo el tiempo "Luke Skywalker"
+            setFavorite(true)
+        } else if (favorite === true){
+            actions.deleteFavorite(vehicle.name);
+            setFavorite(false)
+        };
     };
     
     if (vehicle !== {}){
@@ -34,9 +40,19 @@ const CardVehicle = (props) => {
                     <p className="card-text"><b>Passengers:</b> {vehicle.passengers}</p>
                     <p className='card-text'><b>Manufacturer:</b> {vehicle.manufacturer}</p>
                     <div>
-                        <Link className='btn btn-outline-primary learnMoreButton' to={`/single/vehicle${uid}`}>Learn more!</Link>
-                        <input type="checkbox" className='btn btn-outline-primary btn-check likeButton' id='btn-check-2' checked autoComplete="off" onChange={handleChange}/>
-                        <label className="btn btn-primary" htmlFor="btn-check-2"><i className="fa-regular fa-heart"></i></label>
+                        <Link className='btn btn-outline-primary learnMoreButton' to={`/single/starships/${uid}`}>Learn more!</Link>
+                        <button  
+                               className={`btn btn-outline-primary likeButton ${favorite ? "selected" : null}`}
+                               onClick={(ev) => {
+                                                if (favorite === false){
+                                                        actions.addFavorite(vehicle.name);
+                                                        setFavorite(true);
+                                                }else if (favorite === true){
+                                                    actions.deleteFavorite(vehicle.name);
+                                                    setFavorite(false)
+                                                }}
+                                        }><i className="fa-regular fa-heart"></i>
+                        </button>
                     </div>
                 </div>
             </div>

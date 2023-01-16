@@ -39,6 +39,7 @@ export const Home = () => {
 	return (
 		<div className="text-center mt-5">
 			{/*characters section*/}
+			{console.log(masterList)}
 			<section className="charactersSection">
 				<h2 className="sectionTitle">Characters</h2>
 				<div className="row flex-row flex-nowrap rowSection">
@@ -54,15 +55,15 @@ export const Home = () => {
 
 			{/*planets section*/}
 			<section className="planetsSection">
-			<h2 className="sectionTitle">Planets</h2>
-			<div className="row flex-row flex-nowrap rowSection">
-				{masterPlanet.map((planetUrl, index) => {
-					return(
-						<div className="col-3" key={index}>
-							<CardPlanet className="CardPlanet" url={planetUrl.url}/>
-						</div>)
-				})}
-			</div>
+				<h2 className="sectionTitle">Planets</h2>
+				<div className="row flex-row flex-nowrap rowSection">
+					{masterPlanet.map((planetUrl, index) => {
+						return(
+							<div className="col-3" key={index}>
+								<CardPlanet className="CardPlanet" url={planetUrl.url}/>
+							</div>)
+					})}
+				</div>
 			</section>
 
 			{/*vehicles section*/}

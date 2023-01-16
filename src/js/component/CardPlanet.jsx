@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext"; // trsaigo todos los datos y funciones definidas en appContext.js
 
 const CardPlanet = (props) => {
 
     const [url, setUrl] = useState(props.url);
     const [planet, setPlanet] = useState({});
     const [uid, setUid] = useState();
+    const [favorite, setFavorite] = useState(false);
+    const { store, actions } = useContext(Context);
 
     // el objeto planet se llama planet
     useEffect(()=>{
@@ -15,13 +18,6 @@ const CardPlanet = (props) => {
                         setUid(data.result.uid)})
         .catch(err => console.error(err));
     },[url]);
-
-    const handleChange = (ev) => {
-        console.log(ev)
-        // si no esta activo
-            // actions.addFavorite(char.name)
-        // si SI está
-    };
     
     if (planet !== {}){
         return (
@@ -32,9 +28,19 @@ const CardPlanet = (props) => {
                     <p className="card-text"><b>Population:</b> {planet.population}</p>
                     <p className="card-text"><b>Terrain:</b> {planet.terrain}</p>
                     <div>
-                        <Link className='btn btn-outline-primary learnMoreButton' to={`/single/planet${uid}`} planet={planet}>Learn more!</Link>
-                        <input type="checkbox" className='btn btn-outline-primary btn-check likeButton' id='btn-check-2' checked autoComplete="off" onChange={handleChange}/>
-                        <label className="btn btn-primary" htmlFor="btn-check-2"><i className="fa-regular fa-heart"></i></label>
+                        <Link className='btn btn-outline-primary learnMoreButton' to={`/single/planets/${uid}`} >Learn more!</Link>
+                        <button  
+                               className={`btn btn-outline-primary likeButton ${favorite ? "selected" : null}`}
+                               onClick={(ev) => {
+                                                if (favorite === false){
+                                                        actions.addFavorite(planet.name);
+                                                        setFavorite(true);
+                                                }else if (favorite === true){
+                                                    actions.deleteFavorite(planet.name);
+                                                    setFavorite(false)
+                                                }}
+                                        }><i className="fa-regular fa-heart"></i>
+                        </button>
                     </div>
                 </div>
             </div>

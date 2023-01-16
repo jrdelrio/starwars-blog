@@ -1,0 +1,9 @@
+ name.char
+ vehicle.char
+ planet.char
+ no logro que el nombre lo tome bien
+
+ los favoritos no se me renderizank nuevamente, el estado si cambia
+
+ como le paso os datos a <Link /> para que muestre la info en view.js?
+ 
