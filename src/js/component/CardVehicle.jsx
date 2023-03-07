@@ -9,7 +9,7 @@ const CardVehicle = (props) => {
     const [uid, setUid] = useState();
     const [favorite, setFavorite] = useState(false);
     const { store, actions } = useContext(Context);
-    
+    const globalFavorites = store.favorites
 
     // el objeto planet se llama planet
     useEffect(()=>{
@@ -19,16 +19,6 @@ const CardVehicle = (props) => {
                         setUid(data.result.uid)})
         .catch(err => console.error(err));
     },[url]);
-
-    const handleChange = (ev) => {
-        if (favorite === false){
-            actions.addFavorite(vehicle); // me agrega todo el tiempo "Luke Skywalker"
-            setFavorite(true)
-        } else if (favorite === true){
-            actions.deleteFavorite(vehicle);
-            setFavorite(false)
-        };
-    };
     
     if (vehicle !== {}){
         return (
@@ -42,7 +32,7 @@ const CardVehicle = (props) => {
                     <div>
                         <Link className='btn btn-outline-primary learnMoreButton' to={`/single/starships/${uid}`}>Learn more!</Link>
                         <button  
-                               className={`btn btn-outline-primary likeButton ${favorite ? "selected" : null}`}
+                               className={`btn btn-outline-primary likeButton ${globalFavorites.includes(char) ? "selected" : null}`}
                                onClick={(ev) => {
                                                 if (favorite === false){
                                                         actions.addFavorite(vehicle.name);

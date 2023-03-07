@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { render } from "react-dom";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext"; // trsaigo todos los datos y funciones definidas en appContext.js
 
 const CardCharacter = (props) => {
-
 
     const [url, setUrl] = useState(props.url);
     const [char, setChar] = useState({});

@@ -9,6 +9,7 @@ const CardPlanet = (props) => {
     const [uid, setUid] = useState();
     const [favorite, setFavorite] = useState(false);
     const { store, actions } = useContext(Context);
+    const globalFavorites = store.favorites
 
     // el objeto planet se llama planet
     useEffect(()=>{
@@ -30,7 +31,7 @@ const CardPlanet = (props) => {
                     <div>
                         <Link className='btn btn-outline-primary learnMoreButton' to={`/single/planets/${uid}`} >Learn more!</Link>
                         <button  
-                               className={`btn btn-outline-primary likeButton ${favorite ? "selected" : null}`}
+                               className={`btn btn-outline-primary likeButton ${globalFavorites.includes(char) ? "selected" : null}`}
                                onClick={(ev) => {
                                                 if (favorite === false){
                                                         actions.addFavorite(planet);
