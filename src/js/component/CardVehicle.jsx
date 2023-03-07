@@ -22,10 +22,10 @@ const CardVehicle = (props) => {
 
     const handleChange = (ev) => {
         if (favorite === false){
-            actions.addFavorite(vehicle.name); // me agrega todo el tiempo "Luke Skywalker"
+            actions.addFavorite(vehicle); // me agrega todo el tiempo "Luke Skywalker"
             setFavorite(true)
         } else if (favorite === true){
-            actions.deleteFavorite(vehicle.name);
+            actions.deleteFavorite(vehicle);
             setFavorite(false)
         };
     };

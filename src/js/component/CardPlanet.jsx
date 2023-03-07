@@ -33,10 +33,10 @@ const CardPlanet = (props) => {
                                className={`btn btn-outline-primary likeButton ${favorite ? "selected" : null}`}
                                onClick={(ev) => {
                                                 if (favorite === false){
-                                                        actions.addFavorite(planet.name);
+                                                        actions.addFavorite(planet);
                                                         setFavorite(true);
                                                 }else if (favorite === true){
-                                                    actions.deleteFavorite(planet.name);
+                                                    actions.deleteFavorite(planet);
                                                     setFavorite(false)
                                                 }}
                                         }><i className="fa-regular fa-heart"></i>

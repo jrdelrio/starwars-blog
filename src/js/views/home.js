@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import React, { useEffect, useState , useContext} from "react";
+import { Link } from "react-router-dom";
 import CardCharacter from "../component/CardCharacter.jsx";
 import CardPlanet from "../component/CardPlanet.jsx";
 import CardVehicle from "../component/CardVehicle.jsx";
+import { Context } from "../store/appContext";
 
 export const Home = () => {
+
+	const { store, actions } = useContext(Context);
+	const globalFavorites = store.favorites
 
 	// fetch de la data de personajes
 	let [masterList, setMasterList] = useState([]);
@@ -12,9 +16,8 @@ export const Home = () => {
 		fetch("https://www.swapi.tech/api/people/")
 		.then(res => res.json())
 		.then(data => setMasterList(data.results))
-		.catch(err => console.error(err))
+		.catch(err => console.error(err));
 	},[]);
-	// console.log(masterList)
 
 	// fetch de la data de planetas
 	let [masterPlanet, setMasterPlanet] = useState([]);
@@ -22,9 +25,8 @@ export const Home = () => {
 		fetch("https://www.swapi.tech/api/planets/")
 		.then(res => res.json())
 		.then(data => setMasterPlanet(data.results))
-		.catch(err => console.error(err))
+		.catch(err => console.error(err));
 	},[]);
-	// console.log(masterPlanet)
 
 	// fetch de la data de vahicles
 	let [masterVehicle, setMasterVehicle] = useState([]);
@@ -32,14 +34,40 @@ export const Home = () => {
 		fetch("https://www.swapi.tech/api/vehicles/")
 		.then(res => res.json())
 		.then(data => setMasterVehicle(data.results))
-		.catch(err => console.error(err))
+		.catch(err => console.error(err));
 	},[]);
-	// console.log(masterVehicle)
 
+	function handleClick(item) {
+		actions.deleteFavorite(item);
+		globalFavorites.pop(item);
+
+	}
+
+	if (store.favorites != undefined){
 	return (
+		<>
+		<nav className="navbar navbar-light bg-light mb-3">
+			<Link to="/">
+				<img className='main-logo' src='https://www.freepnglogos.com/uploads/star-wars-logo-31.png' />
+			</Link>
+			<div className="ml-auto">
+				<div className="dropdown">
+					<button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+						Favorites {store.favorites.length}
+					</button>
+					<ul className="dropdown-menu">
+						{store.favorites.map((item, index)=>{
+							return(<li className="dropdown-item" key={index}>
+								{item.name} <i className="fa-regular fa-trash-can" onClick={(ev) => {handleClick(item)}}></i>
+								</li>) 
+						})}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
 		<div className="text-center mt-5">
 			{/*characters section*/}
-			{console.log(masterList)}
 			<section className="charactersSection">
 				<h2 className="sectionTitle">Characters</h2>
 				<div className="row flex-row flex-nowrap rowSection">
@@ -80,6 +108,7 @@ export const Home = () => {
 			</div>
 			</section>		
 		</div>
-	)
+		</>
+	)}
 };
 
