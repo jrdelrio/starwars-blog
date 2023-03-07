@@ -32,13 +32,13 @@ const CardVehicle = (props) => {
                     <div>
                         <Link className='btn btn-outline-primary learnMoreButton' to={`/single/starships/${uid}`}>Learn more!</Link>
                         <button  
-                               className={`btn btn-outline-primary likeButton ${globalFavorites.includes(char) ? "selected" : null}`}
+                               className={`btn btn-outline-primary likeButton ${globalFavorites.includes(vehicle) ? "selected" : null}`}
                                onClick={(ev) => {
                                                 if (favorite === false){
-                                                        actions.addFavorite(vehicle.name);
+                                                        actions.addFavorite(vehicle);
                                                         setFavorite(true);
                                                 }else if (favorite === true){
-                                                    actions.deleteFavorite(vehicle.name);
+                                                    actions.deleteFavorite(vehicle);
                                                     setFavorite(false)
                                                 }}
                                         }><i className="fa-regular fa-heart"></i>

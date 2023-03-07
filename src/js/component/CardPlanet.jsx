@@ -31,7 +31,7 @@ const CardPlanet = (props) => {
                     <div>
                         <Link className='btn btn-outline-primary learnMoreButton' to={`/single/planets/${uid}`} >Learn more!</Link>
                         <button  
-                               className={`btn btn-outline-primary likeButton ${globalFavorites.includes(char) ? "selected" : null}`}
+                               className={`btn btn-outline-primary likeButton ${globalFavorites.includes(planet) ? "selected" : null}`}
                                onClick={(ev) => {
                                                 if (favorite === false){
                                                         actions.addFavorite(planet);
