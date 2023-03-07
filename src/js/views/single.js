@@ -27,6 +27,27 @@ export const Single = (props) => {
 
 	if (params.type === 'people' && features !== {}){
 		return (
+			<>
+			<nav className="navbar navbar-light bg-light mb-3">
+			<Link to="/">
+				<img className='main-logo' src='https://www.freepnglogos.com/uploads/star-wars-logo-31.png' />
+			</Link>
+			<div className="ml-auto">
+				<div className="dropdown">
+					<button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+						Favorites {store.favorites.length}
+					</button>
+					<ul className="dropdown-menu">
+						{store.favorites.map((item, index)=>{
+							return(<li className="dropdown-item" key={index}>
+								{item.name} <i className="fa-regular fa-trash-can" onClick={() => actions.deleteFavorite(item)}></i>
+								</li>) 
+						})}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
 			<div className="text-center mt-5">
 				{/*card de bootstrap*/}
 				<div className="card mb-3">
@@ -86,9 +107,31 @@ export const Single = (props) => {
 					</div>
 				</div>
 			</div>
+			</>
 		)} 
 	else if (params.type === 'starships' && features !== {}) {
 		return(
+			<>
+			<nav className="navbar navbar-light bg-light mb-3">
+			<Link to="/">
+				<img className='main-logo' src='https://www.freepnglogos.com/uploads/star-wars-logo-31.png' />
+			</Link>
+			<div className="ml-auto">
+				<div className="dropdown">
+					<button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+						Favorites {store.favorites.length}
+					</button>
+					<ul className="dropdown-menu">
+						{store.favorites.map((item, index)=>{
+							return(<li className="dropdown-item" key={index}>
+								{item.name} <i className="fa-regular fa-trash-can" onClick={() => actions.deleteFavorite(item)}></i>
+								</li>) 
+						})}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
 			<div className="text-center mt-5">
 			{/*card de bootstrap*/}
 			<div className="card mb-3">
@@ -147,9 +190,30 @@ export const Single = (props) => {
 				</div>
 			</div>
 		</div>
+		</>
 		)} 
 	else if (params.type === 'planets' && features !== {}){
 			return(
+				<>
+				<nav className="navbar navbar-light bg-light mb-3">
+					<Link to="/">
+						<img className='main-logo' src='https://www.freepnglogos.com/uploads/star-wars-logo-31.png' />
+					</Link>
+					<div className="ml-auto">
+						<div className="dropdown">
+							<button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+								Favorites {store.favorites.length}
+							</button>
+							<ul className="dropdown-menu">
+								{store.favorites.map((item, index)=>{
+									return(<li className="dropdown-item" key={index}>
+										{item.name} <i className="fa-regular fa-trash-can" onClick={() => actions.deleteFavorite(item)}></i>
+										</li>) 
+								})}
+							</ul>
+						</div>
+					</div>
+				</nav>
 			<div className="text-center mt-5">
 			{/*card de bootstrap*/}
 			<div className="card mb-3">
@@ -209,10 +273,35 @@ export const Single = (props) => {
 					
 					</div>
 			</div>
-		)} 
+			</>
+		)}
+
 	else{
-		return (<div className="text-center mt-5">Loading...</div>)
-		}
+		return (
+			<>
+			<nav className="navbar navbar-light bg-light mb-3">
+			<Link to="/">
+				<img className='main-logo' src='https://www.freepnglogos.com/uploads/star-wars-logo-31.png' />
+			</Link>
+			<div className="ml-auto">
+				<div className="dropdown">
+					<button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+						Favorites {store.favorites.length}
+					</button>
+					<ul className="dropdown-menu">
+						{store.favorites.map((item, index)=>{
+							return(<li className="dropdown-item" key={index}>
+								{item.name} <i className="fa-regular fa-trash-can" onClick={() => actions.deleteFavorite(item)}></i>
+								</li>) 
+						})}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div className="text-center mt-5">Loading...</div>
+		</>
+		)}
 		
 };
 

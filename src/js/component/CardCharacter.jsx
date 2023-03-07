@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
+import { render } from "react-dom";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext"; // trsaigo todos los datos y funciones definidas en appContext.js
 
 const CardCharacter = (props) => {
+
 
     const [url, setUrl] = useState(props.url);
     const [char, setChar] = useState({});
     const [uid, setUid] = useState();
     const [favorite, setFavorite] = useState(false);
     const { store, actions } = useContext(Context);
+    const globalFavorites = store.favorites
 
     // el objeto personaje de esta card se llama char
     useEffect(()=>{
@@ -31,14 +34,14 @@ const CardCharacter = (props) => {
                     <div>
                         <Link className='btn btn-outline-primary learnMoreButton' to={`/single/people/${uid}`} >Learn more!</Link>
                         <button  
-                               className={`btn btn-outline-primary likeButton ${favorite ? "selected" : null}`}
+                               className={`btn btn-outline-primary likeButton ${globalFavorites.includes(char) ? "selected" : null}`}
                                onClick={(ev) => {
                                                 if (favorite === false){
-                                                        actions.addFavorite(char.name);
+                                                        actions.addFavorite(char);
                                                         setFavorite(true);
                                                 }else if (favorite === true){
-                                                    actions.deleteFavorite(char.name);
-                                                    setFavorite(false)
+                                                    actions.deleteFavorite(char);
+                                                    setFavorite(false);
                                                 }}
                                         }><i className="fa-regular fa-heart"></i>
                         </button>
